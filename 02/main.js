@@ -112,11 +112,37 @@ console.log(myBook.getTheBook("Иван")) //взял Иван но не сда�
 
 /*
 Напилить код функции modificator, такой, чтобы в результате работы кода:
+в консоли было:
+sampleFunc: test | sample
+*/
+
+function sampleFunc() {
+  console.log(`${arguments.callee.name}: ${arguments[0]} | ${arguments[1]}`)
+}
+
+function modificator(func) {
+  return func("test", "sample");
+}
+
+testFunc = modificator(sampleFunc)
+
+testFunc()
+
+/*
+Напилить код функции modificator, такой, чтобы в результате работы кода:
 в консоль было выведено число символов в коде функции sampleFunc, т.е.:
 Symbols in my code: 93
 */
 
-var str = function sampleFunc() {
+function sampleFunc() {
   console.info(`Symbols in my code: ${arguments.callee + 0}`)
 }
-var newStr = String(str).split('')
+
+function modificator(func) {
+  var len = String(func).length
+  return console.info(`Symbols in my code: ${len}`)
+}
+
+modificator(sampleFunc)
+
+sampleFunc()
